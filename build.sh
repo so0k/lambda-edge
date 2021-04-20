@@ -3,17 +3,17 @@
 rm -rf temp
 mkdir -p out
 
-# copy origin-request to temp except node_modules and tests
-mkdir -p temp/origin-request
-cp -r `ls -A origin-request | egrep -v '(node_modules|__tests__)' | sed 's|^|origin-request/|'` temp/origin-request
+# copy $1 to temp except node_modules and tests
+mkdir -p temp/$1
+cp -r `ls -A $1 | egrep -v '(node_modules|__tests__)' | sed "s|^|$1/|"` temp/$1
 
-# build origin-request
-cd temp/origin-request
+# build $1
+cd temp/$1
 version=`jq -r .version package.json`
 name=`jq -r .name package.json`
 yarn --production
 node-prune
 
 # replace archive in `../../out`
-rm -rf ../../out/refapp-static-${name}-${version}.zip
-7z a -r ../../out/refapp-static-${name}-${version}.zip ./
+rm -rf ../../out/alpaca-${name}-${version}.zip
+7z a -r ../../out/alpaca-${name}-${version}.zip ./

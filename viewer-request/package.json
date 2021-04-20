@@ -1,6 +1,6 @@
 {
-  "name": "origin-request",
-  "version": "1.0.3",
+  "name": "viewer-request",
+  "version": "0.1.0",
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
