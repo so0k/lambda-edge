@@ -1,14 +1,19 @@
 #!/bin/bash
 
-mkdir -p out
 rm -rf temp
-cp origin-request temp/
+mkdir -p out
+
+# copy origin-request to temp except node_modules and tests
+mkdir -p temp/origin-request
+cp -r `ls -A origin-request | egrep -v '(node_modules|__tests__)' | sed 's|^|origin-request/|'` temp/origin-request
+
+# build origin-request
 cd temp/origin-request
 version=`jq -r .version package.json`
 name=`jq -r .name package.json`
-rm -rf ../out/refapp-static-${name}-${version}.zip
-rm -rf ./node_modules
-rm -rf ./__tests__
 yarn --production
 node-prune
-7z a -r ../out/refapp-static-${name}-${version}.zip ./
+
+# replace archive in `../../out`
+rm -rf ../../out/refapp-static-${name}-${version}.zip
+7z a -r ../../out/refapp-static-${name}-${version}.zip ./

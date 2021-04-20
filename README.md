@@ -10,7 +10,11 @@
 
 ```
 D:\personal\cable-events>cd origin-request
+
+# install devDependency (jest)
 D:\personal\cable-events\origin-request>yarn
+
+# run jest
 D:\personal\cable-events\origin-request>yarn run jest
 ```
 
@@ -18,6 +22,10 @@ D:\personal\cable-events\origin-request>yarn run jest
 
 Windows requirements:
 
-- tested with MinGW
+- tested with bash emulated through MinGW
 - 7z
 - jq
+
+```
+build.sh
+```
